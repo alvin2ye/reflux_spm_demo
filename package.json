@@ -14,10 +14,14 @@
   },
   "licenses": "MIT",
   "spm": {
-    "output": ["index.js", "main.html"],
+    "output": [
+      "index.js",
+      "main.html"
+    ],
     "dependencies": {
       "react": "~0.13.3",
-      "reflux": "~0.2.7"
+      "reflux": "~0.2.7",
+      "rc-dialog": "~5.0.3"
     },
     "devDependencies": {
       "expect.js": "0.3.1"
