@@ -7,6 +7,29 @@ var Dialog = require("rc-dialog");
 require("rc-dialog/assets/index.css");
 require("./main.less");
 
+var PriceTr = React.createClass({
+  render : function() {
+
+    var RandomPrice = function() {
+      if(Math.random() < 0.5) {
+        return "-";
+      } else {
+        return parseInt(Math.random() * 500 + 100);
+      }
+    }
+
+    return (
+      <tr>
+        <td>{this.props.y}</td>
+        <td><a onClick={this.props.onClick} href="javascript:void(0)">{RandomPrice()}</a></td>
+        <td><a onClick={this.props.onClick}  href="javascript:void(0)">{RandomPrice()}</a></td>
+        <td><a onClick={this.props.onClick}  href="javascript:void(0)">{RandomPrice()}</a></td>
+        <td>&nbsp;</td>
+      </tr>
+    );
+  }
+});
+
 var TodoApp = React.createClass({
   getInitialState: function(){
     return {
@@ -20,7 +43,7 @@ var TodoApp = React.createClass({
         {z: "儿童", y: "35座", x: "如家三星", price: 180},
         {z: "成人", y: "25座", x: "汉庭四星", price: 280}
       ],
-      showDialog: true
+      showDialog: false
     }
   },
   handleClick: function(e) {
@@ -31,8 +54,40 @@ var TodoApp = React.createClass({
     this.setState({showDialog: false})
   },
 
+  handleAddX: function(){
+    var newX = prompt("请输入", "");
+    if(newX && newX.length > 0) {
+      var arr = this.state.levelx;
+      arr.push(newX);
+      this.setState({levelx: arr});
+    }
+  },
+
+  handleAddY: function(){
+    var newX = prompt("请输入", "");
+    if(newX && newX.length > 0) {
+      var arr = this.state.levely;
+      arr.push(newX);
+      this.setState({levely: arr});
+    }
+  },
+
   render: function() {
     var _this = this;
+
+    var renderX = function() {
+      var mapFn = function(i) {
+        return <th>{i}</th>;
+      }
+      return _this.state.levelx.map(mapFn);
+    }
+
+    var renderY = function() {
+      var mapFn = function(i) {
+        return <PriceTr onClick={_this.handleClick} y={i} data={_this.state.data} x={_this.state.levelx} />;
+      }
+      return _this.state.levely.map(mapFn);
+    }
 
     var renderDialog = function() {
       return (
@@ -86,23 +141,20 @@ var TodoApp = React.createClass({
         <h3>成人</h3>
         <table>
           <thead>
-            <th>&nbsp;</th>
-            <th>如家三星</th>
-            <th>汉庭四星</th>
-            <th>喜来登五星</th>
+            <tr>
+              <th>&nbsp;</th>
+              {renderX()}
+              <th><a href="javascript:void(0)" onClick={_this.handleAddX}>+</a></th>
+            </tr>
           </thead>
           <tbody>
+            {renderY()}
             <tr>
-              <td>25座</td>
+              <td><a href="javascript:void(0)" onClick={_this.handleAddY}>+</a></td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
-            </tr>
-            <tr>
-              <td>35座</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
+              <td>&nbsp;</td>
             </tr>
           </tbody>
         </table>
@@ -110,23 +162,20 @@ var TodoApp = React.createClass({
         <h3>儿童</h3>
         <table>
           <thead>
-            <th>&nbsp;</th>
-            <th>如家三星</th>
-            <th>汉庭四星</th>
-            <th>喜来登五星</th>
+            <tr>
+              <th>&nbsp;</th>
+              {renderX()}
+              <th><a href="javascript:void(0)" onClick={_this.handleAddX}>+</a></th>
+            </tr>
           </thead>
           <tbody>
+            {renderY()}
             <tr>
-              <td>25座</td>
+              <td><a href="javascript:void(0)" onClick={_this.handleAddY}>+</a></td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
-            </tr>
-            <tr>
-              <td>35座</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
+              <td>&nbsp;</td>
             </tr>
           </tbody>
         </table>
