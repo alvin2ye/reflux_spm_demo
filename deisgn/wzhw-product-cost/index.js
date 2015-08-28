@@ -7,6 +7,19 @@ var Dialog = require("rc-dialog");
 require("rc-dialog/assets/index.css");
 require("./main.less");
 
+DB =  {
+  levelz: ["成人", "儿童"],
+  levely: ["25座", "35座"],
+  levelx: ["如家三星", "汉庭四星", "喜来登五星"],
+  data: [
+    {z: "成人", y: "25座", x: "如家三星", price: 120},
+    {z: "成人", y: "35座", x: "如家三星", price: 380},
+    {z: "儿童", y: "25座", x: "喜来登五星", price: 780},
+    {z: "儿童", y: "35座", x: "如家三星", price: 180},
+    {z: "成人", y: "25座", x: "汉庭四星", price: 280}
+  ]
+};
+
 var PriceTr = React.createClass({
   render : function() {
 

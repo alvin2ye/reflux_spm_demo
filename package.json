@@ -15,8 +15,12 @@
   "licenses": "MIT",
   "spm": {
     "output": [
-      "index.js",
-      "main.html"
+      "*.js",
+      "*.html", 
+      "demo/use-rc-dialog/use-rcdialog.js",
+      "demo/use-rc-dialog/use-rcdialog.html",
+      "deisgn/wzhw-product-cost/main.html",
+      "deisgn/wzhw-product-cost/index.js"
     ],
     "dependencies": {
       "react": "~0.13.3",
